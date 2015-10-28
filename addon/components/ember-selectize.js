@@ -789,11 +789,9 @@ export default Ember.Component.extend({
       throw new TypeError('template ' + templateName + ' does not exist.');
     }
 
-    var controller = Ember.Controller.create(Ember.typeOf(data) === 'instance' ? data : {data: data});
-    var view = this.createChildView(Ember.View, {
-      template: template,
-      controller: controller,
-      container: this.get('container')
+    var view = this.createChildView(Ember.Component, {
+      layout: template,
+      model: data
     });
 
     return this._getStringFromView(view);
@@ -808,7 +806,7 @@ export default Ember.Component.extend({
 
     var controller = Ember.Controller.create(Ember.typeOf(data) === 'instance' ? data : {data: data});
     var view = this.createChildView(viewClass, {
-      controller: controller
+      controller: data
     });
 
     return this._getStringFromView(view);
